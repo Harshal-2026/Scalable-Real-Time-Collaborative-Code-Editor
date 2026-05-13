@@ -1,0 +1,11 @@
+node_modules/
+dist/
+**/.env
+.env
+.env.local
+.DS_Store
+yjs-db/
+users-db/
+temp/
+package-lock.json
+pnpm-lock.yaml

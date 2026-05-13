@@ -1,0 +1,488 @@
+/* ============================
+   DEEP SPACE LOGIN PAGE
+   ============================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.login-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #030712;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* ---- Particle Canvas ---- */
+.particles-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---- Grid overlay ---- */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.back-to-home {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.back-to-home:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateX(-5px);
+}
+
+/* ---- Floating Orbs ---- */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(90px);
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.orb-1 {
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(99,102,241,0.4) 0%, transparent 70%);
+  top: -120px; left: -100px;
+  animation: drift1 18s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(139,92,246,0.35) 0%, transparent 70%);
+  bottom: -80px; right: -60px;
+  animation: drift2 22s ease-in-out infinite alternate;
+}
+
+.orb-3 {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+  top: 50%; left: 60%;
+  animation: drift3 14s ease-in-out infinite alternate;
+}
+
+.orb-4 {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(168,85,247,0.25) 0%, transparent 70%);
+  top: 10%; right: 15%;
+  animation: drift1 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift1 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 60px) scale(1.08); }
+}
+@keyframes drift2 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-50px, -40px) scale(1.12); }
+}
+@keyframes drift3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, -50px) scale(0.92); }
+}
+
+/* ============================
+   CARD
+   ============================ */
+.login-card {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 440px;
+  min-height: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px 36px;
+  border-radius: 24px;
+  background: rgba(10, 12, 28, 0.75);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255,255,255,0.05);
+  animation: cardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(32px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Animated gradient border */
+.card-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: 25px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.6), rgba(139,92,246,0.5), rgba(59,130,246,0.4), rgba(99,102,241,0.6));
+  background-size: 300% 300%;
+  animation: borderGlow 4s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes borderGlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================
+   HEADER
+   ============================ */
+.lc-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.lc-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2));
+  border: 1px solid rgba(139,92,246,0.3);
+  color: #818cf8;
+  margin-bottom: 16px;
+  box-shadow: 0 0 24px rgba(99,102,241,0.2);
+}
+
+.lc-brand {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+}
+
+.lc-brand span {
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lc-sub {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* ============================
+   SOCIAL BUTTONS
+   ============================ */
+.social-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.google-btn {
+  background: rgba(255,255,255,0.05);
+  color: #e5e7eb;
+}
+
+.google-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 0 20px rgba(66,133,244,0.25);
+  transform: translateY(-1px);
+}
+
+.github-btn {
+  background: rgba(255,255,255,0.05);
+  color: #e5e7eb;
+}
+
+.github-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 0 20px rgba(139,92,246,0.3);
+  transform: translateY(-1px);
+}
+
+/* ============================
+   DIVIDER
+   ============================ */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: #4b5563;
+  font-size: 12px;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+}
+
+/* ============================
+   FORM FIELDS
+   ============================ */
+.lc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca3af;
+  margin-left: 2px;
+}
+
+.field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 14px;
+  color: #4b5563;
+  pointer-events: none;
+  transition: color 0.25s;
+  flex-shrink: 0;
+}
+
+.field-wrap:focus-within .field-icon {
+  color: #818cf8;
+}
+
+.field-wrap input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 13px 16px 13px 42px;
+  font-size: 14px;
+  color: #e5e7eb;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.field-wrap input::placeholder { color: #374151; }
+
+.field-wrap input:focus {
+  border-color: rgba(99,102,241,0.6);
+  background: rgba(99,102,241,0.06);
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.12), 0 0 16px rgba(99,102,241,0.1);
+}
+
+.toggle-pass {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #4b5563;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+  height: auto;
+  line-height: 1;
+}
+
+.toggle-pass:hover { color: #818cf8; }
+
+/* ============================
+   SUBMIT BUTTON
+   ============================ */
+.submit-btn {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(99,102,241,0.5);
+}
+
+.submit-btn:active:not(:disabled) { transform: translateY(0); }
+
+.submit-btn.loading {
+  opacity: 0.85;
+  cursor: wait;
+  animation: gradientShift 1s ease infinite;
+}
+
+.submit-btn.success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  animation: none;
+  box-shadow: 0 8px 24px rgba(16,185,129,0.4);
+}
+
+.btn-text { position: relative; z-index: 1; }
+
+.btn-shimmer {
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { left: -75%; }
+  100% { left: 175%; }
+}
+
+/* ============================
+   STATUS ROW
+   ============================ */
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.5); opacity: 0.6; }
+}
+
+.status-text {
+  font-size: 11px;
+  color: #4b5563;
+  letter-spacing: 0.02em;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 480px) {
+  .login-card { padding: 32px 20px; max-width: 100%; margin: 12px; }
+  .social-row { grid-template-columns: 1fr; }
+  .lc-brand   { font-size: 1.6rem; }
+}
+
+.error-alert {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.switch-auth {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.switch-auth button {
+  background: none;
+  border: none;
+  color: #8b5cf6;
+  font-weight: 600;
+  margin-left: 6px;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.switch-auth button:hover {
+  text-decoration: underline;
+}
