@@ -8,6 +8,7 @@ import WorkflowTutorial from "./WorkflowTutorial";
 function LandingPage() {
   const navigate = useNavigate();
   const canvasRef = useRef(null);
+  const containerRef = useRef(null);
   const [showFeatures, setShowFeatures] = useState(false);
   const [activeModal, setActiveModal] = useState(null); 
 
@@ -137,11 +138,15 @@ function LandingPage() {
   }, []);
 
   return (
-    <div className="landing-container">
+    <div className="landing-container" ref={containerRef}>
       <canvas ref={canvasRef} className="background-canvas" />
       
       <nav className="landing-nav">
-        <div className="logo-wrapper" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div 
+          className="logo-wrapper" 
+          style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+          onClick={() => containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
           <div className="logo-container">
             <Code width="32" height="32" className="logo-icon" />
             <span className="logo-text">CodeRoom</span>
@@ -279,7 +284,9 @@ function LandingPage() {
             <button className="cta-button primary" onClick={() => navigate("/login")}>
               Join Session
             </button>
-            <button className="back-btn-bottom" onClick={() => toggleFeatures(false)}>
+            <button className="back-btn-bottom" onClick={() => {
+              containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+            }}>
               <ArrowLeft size={18} style={{ transform: 'rotate(90deg)' }} />
               <span>Back to Home</span>
             </button>
