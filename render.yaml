@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: scalable-collab-backend
+    runtime: docker
+    rootDir: backend
+    # buildCommand and startCommand are handled by Dockerfile
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false        # You must set this manually in Render dashboard
+      - key: FRONTEND_URL
+        sync: false        # Set this to your deployed frontend URL (e.g. https://your-app.vercel.app)
+      - key: NODE_ENV
+        value: production

@@ -1,0 +1,296 @@
+.workflow-section {
+  padding: 100px 20px;
+  margin-top: 150px;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.workflow-header {
+  text-align: center;
+  max-width: 800px;
+}
+
+.workflow-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.workflow-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  max-width: 1200px;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.workflow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.step-card {
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(10px);
+}
+
+.step-card.active {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
+}
+
+.step-card.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #6366f1;
+}
+
+.step-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #94a3b8;
+  transition: all 0.3s ease;
+}
+
+.step-card.active .step-icon {
+  background: #6366f1;
+  color: white;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.step-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #f1f5f9;
+}
+
+.step-card p {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.workflow-visual {
+  background: rgba(2, 6, 23, 0.8);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Step 1: Join Room Visual */
+.visual-join {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 40px;
+}
+
+.mock-input {
+  width: 100%;
+  max-width: 300px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  color: #6366f1;
+  font-family: monospace;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.cursor-blink {
+  width: 2px;
+  height: 24px;
+  background: #6366f1;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.mock-btn {
+  background: #6366f1;
+  color: white;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
+  50% { transform: scale(1.05); box-shadow: 0 10px 30px rgba(99, 102, 241, 0.5); }
+  100% { transform: scale(1); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
+}
+
+/* Step 2: Collaborate Visual */
+.visual-collab {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.remote-cursor {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  transition: all 0.5s ease;
+}
+
+.remote-cursor.user1 {
+  background: #f43f5e;
+  box-shadow: 0 0 10px #f43f5e;
+}
+
+.remote-cursor.user2 {
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.cursor-tag {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  color: white;
+  white-space: nowrap;
+}
+
+.user1-tag { background: #f43f5e; }
+.user2-tag { background: #10b981; }
+
+/* Step 3: Terminal Visual */
+.visual-terminal {
+  width: 90%;
+  background: #000;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: monospace;
+}
+
+.terminal-line {
+  margin-bottom: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-prompt { color: #10b981; }
+.terminal-command { color: #f1f5f9; }
+.terminal-output { color: #94a3b8; padding-left: 20px; border-left: 2px solid rgba(255, 255, 255, 0.05); }
+
+/* Step 4: AI Visual */
+.visual-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 80%;
+}
+
+.chat-bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  max-width: 90%;
+  position: relative;
+}
+
+.chat-bubble.user {
+  background: rgba(255, 255, 255, 0.05);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble.ai {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.ai-typing {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.ai-dot {
+  width: 4px;
+  height: 4px;
+  background: #6366f1;
+  border-radius: 50%;
+  animation: bounce 1s infinite;
+}
+
+.ai-dot:nth-child(2) { animation-delay: 0.2s; }
+.ai-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 1024px) {
+  .workflow-container {
+    grid-template-columns: 1fr;
+  }
+  .workflow-visual {
+    order: -1;
+    min-height: 300px;
+  }
+}
